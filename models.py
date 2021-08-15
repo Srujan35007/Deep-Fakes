@@ -3,7 +3,7 @@ import torch.nn as nn
 from torchsummary import summary
 
 class Encoder(nn.Module):
-    def __init__(self, img_channels):
+    def __init__(self, img_channels=3):
         self.model_name = 'Face_Encoder_Conv'
         super(Encoder, self).__init__()
         self.layers = nn.Sequential(
@@ -50,7 +50,7 @@ class Encoder(nn.Module):
         print(f'{self.model_name} weights initialized ({count_}/{total_})')
 
 class Decoder(nn.Module):
-    def __init__(self, in_channels, img_channels):
+    def __init__(self, in_channels=256, img_channels=3):
         self.model_name = 'Face_Decoder_Conv'
         super(Decoder, self).__init__()
         self.layers = nn.Sequential(
@@ -95,3 +95,7 @@ class Decoder(nn.Module):
             else:
                 total_ += 1
         print(f'{self.model_name} weights initialized ({count_}/{total_})')
+
+enc = Encoder(3)
+dec = Decoder(256,3)
+print(summary(dec,(256,8,8)))
