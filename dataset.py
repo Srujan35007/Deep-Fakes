@@ -6,9 +6,11 @@ import cv2
 class FaceData(torch.utils.data.Dataset):
     def __init__(self, images_path, num_images, transform):
         image_paths = glob(f"{images_path}/*.jpg")
+        image_paths.sort()
         random.shuffle(image_paths)
         n_paths = min(num_images, len(image_paths))
         self.image_paths = image_paths[:n_paths]
+        self.image_paths.sort()
         self.transform = transform
 
     def __len__(self):
